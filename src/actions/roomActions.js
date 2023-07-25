@@ -2,6 +2,9 @@ import {SET_CLIENT_ID, SET_GAME_ID, SET_GAME_ROOM, SET_CONNECTION, CLEAR_ROOMS, 
 import axios from 'axios';
 import store from '../store';
 
+let BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+let API_URL = `${BACKEND_URL}/api/`;
+
 export const setClient = (clientId) => (dispatch) => {
     dispatch({
         type: SET_CLIENT_ID,
@@ -36,7 +39,7 @@ export const setConnection = (connection) => (dispatch) => {
 }
 
 export const getRooms = () => (dispatch) => {
-    axios.get('/api/rooms')
+    axios.get(API_URL+'rooms')
         .then(res => dispatch({
             type: GET_ROOMS,
             payload: Object.values(res.data.games)       
@@ -44,6 +47,6 @@ export const getRooms = () => (dispatch) => {
 }
 
 export const deleteRoom = () => (dispatch) => {
-    axios.delete('/api/rooms/room/' + store.getState().room.gameRoom[0].gameId)
+    axios.delete(API_URL+'rooms/room/' + store.getState().room.gameRoom[0].gameId)
         .then(res => console.log("delete room res: ", res))
 }

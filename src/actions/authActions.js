@@ -12,13 +12,18 @@ import{
     CLEAR_ERRORS
 } from './types';
 
+let BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+let API_URL = `${BACKEND_URL}/api/`;
+
+console.log('url :',API_URL)
+
 //Check token and load user
 export const loadUser = () => (dispatch, getState) => {
     //User loading
     dispatch({type: USER_LOADING});
 
     //Fetch the user
-    axios.get('/api/auth/user', tokenConfig(getState))
+    axios.get(API_URL+'auth/user', tokenConfig(getState))
         .then(res => 
           
             dispatch({
@@ -46,7 +51,7 @@ export const register = ({name, email, password, confirmPassword}) => dispatch =
     //Request body
     const body = JSON.stringify({name, email, password, confirmPassword});
 
-    axios.post('/api/users', body, config)
+    axios.post(API_URL+'users', body, config)
         .then(res => dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data
@@ -72,7 +77,7 @@ export const login = ({email, password}) => dispatch => {
     //Request body
     const body = JSON.stringify({email, password});
 
-    axios.post('/api/auth', body, config)
+    axios.post(API_URL+'auth', body, config)
         //dispatch to the authReducer
         .then(res => 
             

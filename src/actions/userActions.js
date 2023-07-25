@@ -22,8 +22,11 @@ import axios from 'axios'
 import store from '../store';
 import { spells } from '../json/spells.json'
 
+let BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+let API_URL = `${BACKEND_URL}/api/`;
+
 export const getUser = () => (dispatch) => {
-    axios.get('/api/users/user/' + store.getState().auth.id)
+    axios.get(API_URL +'users/user/' + store.getState().auth.id)
     
         .then(res => dispatch({
             type: GET_USER,
@@ -35,7 +38,7 @@ export const getUser = () => (dispatch) => {
 
 //GET USER INFO
 export const getUserInfo = (id) => (dispatch) => {
-    axios.get('/api/users/userdata/' + id)
+    axios.get(API_URL + 'users/userdata/' + id)
         .then(res => dispatch({
             type: GET_INFO,
             payload: res.data
@@ -45,7 +48,7 @@ export const getUserInfo = (id) => (dispatch) => {
 
 //SET USER INFO
 export const setUserInfo = (id, data) => dispatch => {
-    axios.post('/api/users/setuserdata/' + id, {data: data})
+    axios.post(API_URL + 'users/setuserdata/' + id, {data: data})
         .then(() => dispatch({
             type: SET_INFO,
             payload: data
@@ -86,7 +89,7 @@ export const setSpells = (spell) => (dispatch) => {
 
 //GET SPELLS
 export const getSpells = (id) => (dispatch) => {
-    axios.get('/api/users/unlockedSpells/' + id)
+    axios.get(API_URL +'users/unlockedSpells/' + id)
         .then(res => 
             dispatch({
                 type: GET_SPELLS,
@@ -96,7 +99,7 @@ export const getSpells = (id) => (dispatch) => {
 
 export const openPack = () => (dispatch) => {
     if(store.getState().user.packs >= 1){
-        axios.post('/api/packs/openpack/' + store.getState().auth.id, { spells })
+        axios.post(API_URL +'packs/openpack/' + store.getState().auth.id, { spells })
             .then(res => dispatch({
                 type: OPEN_PACK,
                 payload: res.data
@@ -105,7 +108,7 @@ export const openPack = () => (dispatch) => {
 }
 
 export const buySpell = (spell) => (dispatch) => {
-        axios.post('/api/users/buyspell/' + store.getState().auth.id, {'spell': spell})
+        axios.post(API_URL +'users/buyspell/' + store.getState().auth.id, {'spell': spell})
             .then(res => dispatch({
                 type: BUY_SPELL,
                 payload: res.data
@@ -113,7 +116,7 @@ export const buySpell = (spell) => (dispatch) => {
 }
 
 export const setGold = (id, amount) => (dispatch) => {
-    axios.post('/api/users/gold/' + id, {amount})
+    axios.post(API_URL +'users/gold/' + id, {amount})
         .then(res => dispatch({
             type: GET_GOLD,
             payload: res.data
@@ -121,7 +124,7 @@ export const setGold = (id, amount) => (dispatch) => {
 }
 
 export const getGold = (id) => (dispatch) => {
-    axios.get('/api/users/gold/' + id)
+    axios.get(API_URL +'users/gold/' + id)
         .then(res => dispatch({
             type: GET_GOLD,
             payload: res.data
@@ -135,7 +138,7 @@ export const clearPack = () => (dispatch) => {
 }
 
 export const buyPack = item => dispatch => {
-    axios.post('/api/packs/buypacks/' + store.getState().auth.id, {item})
+    axios.post(API_URL +'packs/buypacks/' + store.getState().auth.id, {item})
         .then(res => dispatch({
             type: BUY_PACK,
             payload: res.data
@@ -143,7 +146,7 @@ export const buyPack = item => dispatch => {
 }
 
 export const getPacks = () => dispatch => {
-    axios.get('/api/packs/getpacks/' + store.getState().auth.id)
+    axios.get(API_URL +'packs/getpacks/' + store.getState().auth.id)
         .then(res => dispatch({
             type: GET_PACKS,
             payload: res.data
@@ -158,7 +161,7 @@ export const setLoadouts = (loadouts) => (dispatch) => {
 }
 
 export const saveLoadouts = () => (dispatch) => {
-    axios.post('/api/users/saveloadouts/' + store.getState().auth.id, {"loadouts": store.getState().user.loadouts})
+    axios.post(API_URL +'users/saveloadouts/' + store.getState().auth.id, {"loadouts": store.getState().user.loadouts})
     .then(res => dispatch({
         type: SAVE_LOADOUTS,
         payload: res.data.loadouts
