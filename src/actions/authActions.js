@@ -15,7 +15,7 @@ import{
 let BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 let API_URL = `${BACKEND_URL}/api/`;
 
-console.log('url :',API_URL)
+console.log('url :',API_URL+'auth/user')
 
 //Check token and load user
 export const loadUser = () => (dispatch, getState) => {
