@@ -79,9 +79,9 @@ const Lobby = ({setClient, setGameRoom, setConnection}) => {
     var HOST = null;
 
     if(process.env.NODE_ENV === 'development'){
-        HOST = "ws://localhost:5000"
+        HOST = "wss://localhost:5000"
     }else if(process.env.NODE_ENV === 'production'){
-        HOST = 'ws://bb-back.onrender.com'
+        HOST = 'wss://bb-back.onrender.com'
     }
 
     let ws = new WebSocket(HOST + '/' + store.getState().auth.id)
