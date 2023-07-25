@@ -13,8 +13,10 @@ const Card = ({ spell, action, style, owned, attribute }) => {
 				return "#0974da"
 			case 'holy':
 				return '#e6ec1c'
+				case 'fire':
+					return 'bd0404'
 			default:
-				return 'purple'
+				return '#e6ec1c'
 		}
 	}
 

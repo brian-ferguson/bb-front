@@ -79,7 +79,7 @@ const Lobby = ({setClient, setGameRoom, setConnection}) => {
     var HOST = null;
 
     if(process.env.NODE_ENV === 'development'){
-        HOST = "wss://localhost:5000"
+        HOST = "ws://localhost:5000"
     }else if(process.env.NODE_ENV === 'production'){
         HOST = 'wss://bb-back.onrender.com'
     }
